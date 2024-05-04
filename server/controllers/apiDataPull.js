@@ -6,7 +6,7 @@ dotenv.config();
 
 const api = process.env.API;
 const limit = 247000;
-let c=0;
+let c = 0;
 
 const apiPullData = async () => {
     try {
@@ -24,7 +24,7 @@ const apiPullData = async () => {
                     sourceIdentifier: cveData.sourceIdentifier,
                     published: new Date(cveData.published),
                     lastModified: new Date(cveData.lastModified),
-                    vulnStatus:cveData.vulnStatus,
+                    vulnStatus: cveData.vulnStatus,
                     descriptions: cveData.descriptions ? cveData.descriptions[0].value : "",
                     cvssMetricV20: cveData.metrics.cvssMetricV2 || [],
                     cvssMetricV30: cveData.metrics.cvssMetricV30 || [],

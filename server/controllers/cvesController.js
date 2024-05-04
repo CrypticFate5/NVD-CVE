@@ -5,7 +5,7 @@ export const getCvesList = async (req, res) => {
         const datas = await CVEModel.find();
         const formattedData = datas.map(({ _id, cveId, sourceIdentifier, published, lastModified, vulnStatus }) => {
             return { _id, cveId, sourceIdentifier, published, lastModified, vulnStatus };
-        } );
+        });
         console.log(datas);
         res.status(200).json(formattedData);
     }
@@ -17,7 +17,7 @@ export const getCvesList = async (req, res) => {
 export const getCveDetails = async (req, res) => {
     try {
         const { cveId } = req.params;
-        const data = await CVEModel.find({cveId:cveId});
+        const data = await CVEModel.find({ cveId: cveId });
         res.status(200).json(data);
     }
     catch (error) {
