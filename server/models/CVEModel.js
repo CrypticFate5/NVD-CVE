@@ -19,8 +19,15 @@ const cveSchema = new mongoose.Schema({
         vulnerable: Boolean,
         criteria: String,
         matchCriteriaId: String
+    }],
+    weaknesses:[{
+        type:mongoose.Schema.Types.Mixed,
+    }],
+    references:[{
+        url:String,
+        source:String,
     }]
 });
 
-const CVEModel = mongoose.model("CVEModel", cveSchema);
+const CVEModel = mongoose.model("CVE", cveSchema);
 export default CVEModel;

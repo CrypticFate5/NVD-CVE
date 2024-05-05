@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(helmet());
 
 // const job=cron.schedule("0 30 01 * * *",apiPullData);
-// apiPullData();
+apiPullData();
 
 app.use("/cves", cvesRoute);
 

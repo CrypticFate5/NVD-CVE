@@ -29,7 +29,9 @@ const apiPullData = async () => {
                     cvssMetricV20: cveData.metrics.cvssMetricV2 || [],
                     cvssMetricV30: cveData.metrics.cvssMetricV30 || [],
                     cvssMetricV31: cveData.metrics.cvssMetricV31 || [],
-                    cpeMatch: cpeMatch
+                    cpeMatch: cpeMatch,
+                    weaknesses:cveData.weaknesses,
+                    references:cveData.references,
                 };
 
                 const newCVE = new CVE(newData);
