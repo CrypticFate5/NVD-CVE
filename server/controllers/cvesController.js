@@ -2,13 +2,40 @@ import CVEModel from "../models/CVEModel.js";
 
 export const getCvesList = async (req, res) => {
     try {
-        const data = await CVEModel.find();
+
+        const docsLen = await CVEModel.countDocuments();
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+
+        const startIdx = (page - 1) * limit;
+        const endIdx = page * limit;
+
+        const pagination = {};
+
+        pagination.docsLen = docsLen;
+
+        if (endIdx < docsLen) {
+            pagination.next = {
+                page: page + 1,
+                limit: limit
+            }
+        };
+
+        if (startIdx > 0) {
+            pagination.previous = {
+                page: page - 1,
+                limit: limit
+            }
+        }
+
+        const data = await CVEModel.find().limit(limit).skip(startIdx);
+
         if (!data || data.length == 0)
             throw new Error("CVE List not found");
         const formattedData = data.map(({ _id, cveId, sourceIdentifier, published, lastModified, vulnStatus }) => {
             return { _id, cveId, sourceIdentifier, published, lastModified, vulnStatus };
         });
-        res.status(200).json(formattedData);
+        res.status(200).json({ pagination, formattedData });
     }
     catch (error) {
         res.status(404).json({ msg: error.message });
@@ -26,7 +53,7 @@ export const getCveDetails = async (req, res) => {
                 return { _id, cveId, descriptions, cvssMetricV20, cvssMetricV30, cvssMetricV31, cpeMatch };
             }
         )
-        res.status(200).json(formattedData);
+        res.status(200).json(formattedData[0]);
     }
     catch (error) {
         res.status(404).json({ msg: error.message });

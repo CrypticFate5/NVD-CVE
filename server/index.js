@@ -2,13 +2,15 @@ import express from "express";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import apiPullData from "./controllers/apiDataPull.js";
+import cors from "cors";
+
 import cvesRoute from "./routes/cvesRoute.js";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
+app.use(cors());
 
 // const job=cron.schedule("0 30 01 * * *",apiPullData);
 // apiPullData();

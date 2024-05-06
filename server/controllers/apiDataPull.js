@@ -30,8 +30,8 @@ const apiPullData = async () => {
                     cvssMetricV30: cveData.metrics.cvssMetricV30 || [],
                     cvssMetricV31: cveData.metrics.cvssMetricV31 || [],
                     cpeMatch: cpeMatch,
-                    weaknesses:cveData.weaknesses,
-                    references:cveData.references,
+                    weaknesses: cveData.weaknesses,
+                    references: cveData.references,
                 };
 
                 const updatedCVE = await CVE.findOneAndUpdate(
@@ -39,7 +39,7 @@ const apiPullData = async () => {
                     newData,
                     { upsert: true, new: true }
                 );
-                if(updatedCVE) console.log(`Data added ${c}`);
+                if (updatedCVE) console.log(`Data added ${c}`);
             }
         }
         console.log("Data import completed.");

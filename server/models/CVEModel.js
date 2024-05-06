@@ -20,12 +20,12 @@ const cveSchema = new mongoose.Schema({
         criteria: String,
         matchCriteriaId: String
     }],
-    weaknesses:[{
-        type:mongoose.Schema.Types.Mixed,
+    weaknesses: [{
+        type: mongoose.Schema.Types.Mixed,
     }],
-    references:[{
-        url:String,
-        source:String,
+    references: [{
+        url: String,
+        source: String,
     }]
 });
 
