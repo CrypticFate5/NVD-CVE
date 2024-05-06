@@ -34,9 +34,12 @@ const apiPullData = async () => {
                     references:cveData.references,
                 };
 
-                const newCVE = new CVE(newData);
-                await newCVE.save();
-                console.log(`Data added ${c}`);
+                const updatedCVE = await CVE.findOneAndUpdate(
+                    { cveId: newData.cveId },
+                    newData,
+                    { upsert: true, new: true }
+                );
+                if(updatedCVE) console.log(`Data added ${c}`);
             }
         }
         console.log("Data import completed.");
